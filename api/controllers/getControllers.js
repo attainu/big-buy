@@ -33,7 +33,7 @@ module.exports = {
             return res.status(500).send({error:error.message})
         }
     },
-        // --------------All Seekers List------------------------------------------------
+        // --------------All Users List------------------------------------------------
 
         async allUsers(req,res) {
             try {
@@ -48,7 +48,7 @@ module.exports = {
                 return res.status(500).send({error:error.message})
             }
         },
-        // -----------------Filtering Available Jobs--------------------
+        // -----------------Filtering Available products--------------------
 
         async filterProducts(req, res) {
             try {
