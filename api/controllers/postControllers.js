@@ -5,6 +5,7 @@ const Joi = require("@hapi/joi");
 const UserDetails = require("../models/user")
 const AdminDetails = require("../models/Admin")
 const Product = require("../models/product")
+const orders = require("../models/order")
 
 const { sendMailToUser, forgotPasswordMailing } = require("../utils/nodeMailer")
 
@@ -108,7 +109,33 @@ module.exports={
     } catch (err) {
       return res.status(500).send({error:err.message})
     }
-  }
+  },
+
+  addtocart(req, res) {
+    var user = req.user
+    var productId = req.params.productId
+    Product.find({_id:productId}).then(function(product){
+
+    var cart = new orders()
+        cart.userId=req.query.userId
+        cart.product=product[0]._id
+        cart.price=product[0].price
+        cart.name=product[0].name
+        cart.image=product[0].image
+        cart.save().then(function () {
+        })
+    user.save().then(function () {
+        res.send("Product successfully added to cart")
+    }).catch(function (err) {
+        console.log(err)
+        if (err.name === "ValidationError")
+            return res.status(400).send(`Validation Error: ${err.message}`);
+        return res.status(500).send("Server Error");
+    })
+        
+    })
+
+    }
 }
 
 

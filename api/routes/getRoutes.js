@@ -5,9 +5,10 @@ const {allAvailableProducts,
        allUsers,
        searchProductById,
        filterProducts,
-       accountActivation} = require ("../controllers/getControllers")
+       accountActivation,
+       cart} = require ("../controllers/getControllers")
 
-const {authenticateAdminsToken} = require("../middlewares/authenticate");
+const {authenticateAdminsToken, authenticateUsersToken} = require("../middlewares/authenticate");
 const { all } = require("./updateRoutes");
 
 
@@ -24,6 +25,7 @@ router.get(`/api/user/accountactivation/:activationtoken`,accountActivation)
 router.get(`/api/user/products/:pagenumber`, allAvailableProducts)
 router.get(`/api/user/product/:productid`, searchProductById)
 router.get(`/api/user/product/filterproducts/:pagenumber`,filterProducts) //-- search by query=name,seller,freeDelivery
+router.get(`/api/user/cart/`, authenticateUsersToken,cart)
 
 
 module.exports = router;

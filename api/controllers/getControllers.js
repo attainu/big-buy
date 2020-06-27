@@ -1,6 +1,7 @@
 const UserDetails = require("../models/user")
 const AdminDetails = require("../models/Admin")
 const Product = require("../models/product")
+const orders = require("../models/order")
 
 const jwt = require("jsonwebtoken")
 
@@ -111,6 +112,17 @@ module.exports = {
                 res.status(500).send({error:error.message})
             }
         } ,
+
+        cart(req, res) {
+            var user = req.user._id
+            UserDetails.findOne({_id:user}).then(function(user){
+                id=user._id
+            orders.find({ userId: id}).then(function(prod){
+                console.log(prod)
+                res.send({order:prod}) 
+                })
+            })}
+
 
       
                

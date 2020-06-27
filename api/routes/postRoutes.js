@@ -1,9 +1,13 @@
 const { Router } = require("express");
 const router = Router();
 
-const { userRegister, userLogin, forgotPassword,postProduct} = require("../controllers/postControllers")
+const { userRegister,
+        userLogin,
+        forgotPassword,
+        postProduct,
+        addtocart} = require("../controllers/postControllers")
 
-const{authenticateAdminsToken } = require("../middlewares/authenticate")
+const{authenticateAdminsToken, authenticateUsersToken } = require("../middlewares/authenticate")
 
 
 //--------------------Account Register Route (user and Admin)------------------
@@ -18,6 +22,11 @@ router.post(`/api/user/forgotpassword`,forgotPassword)
 //-----------------------Admin product post-----------------------
 
 router.post(`/api/admin/postproduct`,authenticateAdminsToken ,postProduct);
+
+
+//------------------------user add product to cart-----------------
+
+router.post(`/api/user/addtocart/:productId`, authenticateUsersToken,addtocart)
 
 
 module.exports = router

@@ -10,7 +10,7 @@ router.delete(`/api/user/logout/`, authenticateUsersToken, userLogout);
 // -------------------------admin Route-----------------------
 router.delete(`/api/admin/logout/`, authenticateAdminsToken, adminLogout); 
 router.delete(`/api/admin/deleteproduct`, authenticateAdminsToken, deleteProduct);
-
+router.delete(`/api/admin/deleteproduct`, authenticateAdminsToken, deleteProduct);
 
 
 module.exports= router;
