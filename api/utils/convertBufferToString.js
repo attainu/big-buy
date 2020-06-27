@@ -1,9 +1,8 @@
-const DataUri = require("datauri/parser")
-var dataUriChild = new DataUri()
-const path = require("path")
+import DataUri from "datauri/parser";
+const dataUriChild = new DataUri();
+import path from "path";
 
-
-module.exports=function(originalName,buffer){
-    var extName = path.extname(originalName)
-    return dataUriChild.format(extName,buffer).content
-}
+export default (originalName, buffer) => {
+  const extName = path.extname(originalName);
+  return dataUriChild.format(extName, buffer).content;
+};

@@ -1,14 +1,15 @@
-const mongoose = require("mongoose");
-const {MONGODB_URI,MONGODB_PASSWORD} = process.env;
-mongoose.set('useFindAndModify', false);
-mongoose.connect(MONGODB_URI.replace("<password>", MONGODB_PASSWORD), {
+import mongoose from "mongoose";
+const { MONGODB_URI, MONGODB_PASSWORD } = process.env;
+mongoose.set("useFindAndModify", false);
+mongoose
+  .connect(MONGODB_URI.replace("<password>", MONGODB_PASSWORD), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
-  .then(function() {
+  .then(() => {
     console.log("Database connected successfully");
   })
-  .catch(function(err) {
-    console.log(err.message);
+  .catch(({ message }) => {
+    console.log(message);
   });

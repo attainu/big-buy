@@ -1,16 +1,29 @@
-const { Router } = require("express");
+import { Router } from "express";
 const router = Router();
-const {  userLogout, adminLogout,deleteProduct }=require("../controllers/deleteControllers")
-const {authenticateUsersToken,authenticateAdminsToken,} = require("../middlewares/authenticate")
-
+import {
+  userLogout,
+  adminLogout,
+  deleteProduct,
+} from "../controllers/deleteControllers";
+import {
+  authenticateUsersToken,
+  authenticateAdminsToken,
+} from "../middlewares/authenticate";
 
 // -------------------------user Route-----------------------
-router.delete(`/api/user/logout/`, authenticateUsersToken, userLogout); 
+router.delete(`/api/user/logout/`, authenticateUsersToken, userLogout);
 
 // -------------------------admin Route-----------------------
-router.delete(`/api/admin/logout/`, authenticateAdminsToken, adminLogout); 
-router.delete(`/api/admin/deleteproduct`, authenticateAdminsToken, deleteProduct);
-router.delete(`/api/admin/deleteproduct`, authenticateAdminsToken, deleteProduct);
+router.delete(`/api/admin/logout/`, authenticateAdminsToken, adminLogout);
+router.delete(
+  `/api/admin/deleteproduct`,
+  authenticateAdminsToken,
+  deleteProduct
+);
+router.delete(
+  `/api/admin/deleteproduct`,
+  authenticateAdminsToken,
+  deleteProduct
+);
 
-
-module.exports= router;
+export default router;
