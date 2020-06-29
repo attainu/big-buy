@@ -1,29 +1,30 @@
 import { Router } from "express";
-const router = Router();
+
 import {
+  deleteProduct,
   userLogout,
   adminLogout,
-  deleteProduct,
 } from "../controllers/deleteControllers";
-import {
-  authenticateUsersToken,
-  authenticateAdminsToken,
-} from "../middlewares/authenticate";
+
+import auth from "../middlewares/authenticate";
+
+export const deleteRouter = Router();
 
 // -------------------------user Route-----------------------
-router.delete(`/api/user/logout/`, authenticateUsersToken, userLogout);
+deleteRouter.delete(
+  `/api/user/logout/`,
+  auth.authenticateUsersToken,
+  userLogout
+);
 
 // -------------------------admin Route-----------------------
-router.delete(`/api/admin/logout/`, authenticateAdminsToken, adminLogout);
-router.delete(
+deleteRouter.delete(
+  `/api/admin/logout/`,
+  auth.authenticateAdminsToken,
+  adminLogout
+);
+deleteRouter.delete(
   `/api/admin/deleteproduct`,
-  authenticateAdminsToken,
+  auth.authenticateAdminsToken,
   deleteProduct
 );
-router.delete(
-  `/api/admin/deleteproduct`,
-  authenticateAdminsToken,
-  deleteProduct
-);
-
-export default router;

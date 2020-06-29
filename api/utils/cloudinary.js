@@ -1,7 +1,7 @@
-import { v2 as cloudinary } from "cloudinary";
+const cloudinary = require("cloudinary").v2
 
 cloudinary.config({
-  CLOUDINARY_URL: process.env.CLOUDINARY_URL,
-});
+    CLOUDINARY_URL:process.env.CLOUDINARY_URL
+})
 
-export default cloudinary;
+module.exports=cloudinary

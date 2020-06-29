@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import { model, Schema } from "mongoose";
 
 const AdminSchema = new Schema({
   name: {
@@ -28,6 +27,4 @@ const AdminSchema = new Schema({
   },
 });
 
-const AdminDetails = mongoose.model("adminDetail", AdminSchema);
-
-export default AdminDetails;
+export const AdminDetails = model("adminDetail", AdminSchema);

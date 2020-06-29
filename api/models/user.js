@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import { model, Schema } from "mongoose";
+
 const userSchema = new Schema(
   {
     name: {
@@ -35,5 +35,4 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-const UserDetails = mongoose.model("userDetail", userSchema);
-export default UserDetails;
+export const UserDetails = model("userDetail", userSchema);

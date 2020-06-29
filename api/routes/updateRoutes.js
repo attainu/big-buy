@@ -1,11 +1,13 @@
 import { Router } from "express";
-const router = Router();
+export const updateRouter = Router();
 
 import upload from "../utils/multer";
+
 import {
   authenticateAdminsToken,
   authenticateUsersToken,
 } from "../middlewares/authenticate";
+
 import {
   blocking,
   unblocking,
@@ -16,24 +18,30 @@ import {
 
 //----------------------------Admin blocking user ----------------------------
 
-router.patch(`/api/admin/user/block`, authenticateAdminsToken, blocking);
-router.patch(`/api/admin/user/unblock`, authenticateAdminsToken, unblocking);
+updateRouter.patch(`/api/admin/user/block`, authenticateAdminsToken, blocking);
+updateRouter.patch(
+  `/api/admin/user/unblock`,
+  authenticateAdminsToken,
+  unblocking
+);
 
 // --------------------------Admin update products----------------------------
 
-router.patch(
+updateRouter.patch(
   `/api/admin/product/update`,
   authenticateAdminsToken,
   updatingProduct
 );
 
 //---------------------------------user routes---------------------------------
-router.patch(
+updateRouter.patch(
   `/api/user/uploadprofilepicture`,
   authenticateUsersToken,
   upload.single("image"),
   uploadProfilePicture
 );
-router.patch(`/api/user/editpassword`, authenticateUsersToken, editPassword);
-
-export default router;
+updateRouter.patch(
+  `/api/user/editpassword`,
+  authenticateUsersToken,
+  editPassword
+);

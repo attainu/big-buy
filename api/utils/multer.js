@@ -1,20 +1,23 @@
-import multer from "multer";
+const multer = require("multer")
 
 const multerConfigMemoryStorage = {
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 1024 * 1024 * 2,
-  },
-  filefilter(req, { mimetype }, cb) {
-    if (mimetype === "image/jpeg" || mimetype === "image/png") {
-      cb(null, true);
-    } else {
-      const newError = new Error("file type is incorrect");
-      cb(newError, false);
+    storage:multer.memoryStorage(),
+    limits:{
+        fileSize:1024*1024*2
+    },
+    filefilter: function(req,file,cb){
+        if(file.mimetype==="image/jpeg"|| file.mimetype==="image/png"){
+            cb(null,true)
+        }
+        else{
+            var newError= new Error("file type is incorrect");
+            cb(newError,false)
+        }
     }
-  },
-};
 
-const upload = multer(multerConfigMemoryStorage);
+}
 
-export default upload;
+
+const upload = multer(multerConfigMemoryStorage)
+
+module.exports=upload

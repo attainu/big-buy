@@ -1,4 +1,9 @@
 import nodemailer from "nodemailer";
+
+import { config } from "dotenv";
+
+config({ path: "../../.env" });
+
 const transport = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -9,9 +14,9 @@ const transport = nodemailer.createTransport({
   },
 });
 
-transport.verify().then((res) => console.log(res));
+// transport.verify().then((res) => console.log(res));
 
-function sendMailToUser(user, email, activationToken) {
+export function sendMailToUser(user, email, activationToken) {
   transport
     .sendMail({
       from: process.env.GMAIL,
@@ -23,10 +28,10 @@ function sendMailToUser(user, email, activationToken) {
     .then((response) => {
       console.log(response);
     })
-    .catch(({ message }) => console.log(message));
+    .catch((err) => console.log(err.message));
 }
 
-function forgotPasswordMailing(email, password) {
+export function forgotPasswordMailing(email, password) {
   transport
     .sendMail({
       from: process.env.GMAIL,
@@ -38,7 +43,5 @@ function forgotPasswordMailing(email, password) {
     .then((response) => {
       console.log(response);
     })
-    .catch(({ message }) => console.log(message));
+    .catch((err) => console.log(err.message));
 }
-
-export default { sendMailToUser, forgotPasswordMailing };

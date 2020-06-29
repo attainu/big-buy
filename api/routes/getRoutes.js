@@ -1,5 +1,6 @@
 import { Router } from "express";
-const router = Router();
+
+export const getRouter = Router();
 
 import {
   allAvailableProducts,
@@ -7,32 +8,31 @@ import {
   searchProductById,
   filterProducts,
   accountActivation,
-  cart,
 } from "../controllers/getControllers";
 
-import {
-  authenticateAdminsToken,
-  authenticateUsersToken,
-} from "../middlewares/authenticate";
-import { all } from "./updateRoutes";
+import { authenticateAdminsToken } from "../middlewares/authenticate";
 
 //-------------------------------Admin-----------------------------------
 
-router.get(
+getRouter.get(
   `/api/admin/products/:pagenumber`,
   authenticateAdminsToken,
   allAvailableProducts
 );
-router.get(`/api/admin/users/:pagenumber`, authenticateAdminsToken, allUsers);
+getRouter.get(
+  `/api/admin/users/:pagenumber`,
+  authenticateAdminsToken,
+  allUsers
+);
 
 //------------------------------user account activation-------------------
 
-router.get(`/api/user/accountactivation/:activationtoken`, accountActivation);
+getRouter.get(
+  `/api/user/accountactivation/:activationtoken`,
+  accountActivation
+);
 
 //--------------------------------user----------------------------
-router.get(`/api/user/products/:pagenumber`, allAvailableProducts);
-router.get(`/api/user/product/:productid`, searchProductById);
-router.get(`/api/user/product/filterproducts/:pagenumber`, filterProducts); //-- search by query=name,seller,freeDelivery
-router.get(`/api/user/cart/`, authenticateUsersToken, cart);
-
-export default router;
+getRouter.get(`/api/user/products/:pagenumber`, allAvailableProducts);
+getRouter.get(`/api/user/product/:productid`, searchProductById);
+getRouter.get(`/api/user/product/filterproducts/:pagenumber`, filterProducts); //-- search by query=name,seller,freeDelivery
