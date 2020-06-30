@@ -1,7 +1,7 @@
 import UserDetails from "../models/user";
 import AdminDetails from "../models/Admin";
 import Product from "../models/product";
-import Order from "../models/product";
+import Order from "../models/order";
 
 import jwt from "jsonwebtoken";
 
@@ -132,3 +132,19 @@ export const cart=   function (req, res) {
       res.send({order:prod}) ;
       });
   })};
+
+
+  // --------------All Seekers List------------------------------------------------
+
+export const allOrders = async (req, res) => {
+  try {
+    const allOrders = await Order.find()
+      .skip((req.params.pagenumber - 1) * 10)
+      .limit(10)
+      .sort({ createdAt: -1 });
+    const count = await Order.find({}).countDocuments({});
+    return res.status(200).json({ count, allOrders });
+  } catch (error) {
+    return res.status(500).send({ error: error.message });
+  }
+};

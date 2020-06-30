@@ -1,7 +1,7 @@
 import UserDetails from "../models/user";
 import AdminDetails from "../models/Admin";
 import Product from "../models/product";
-import Order from "../models/product";
+import Order from "../models/order";
 
 
 // ----------------------Logout from Account (user)------------------------
@@ -47,7 +47,7 @@ export const deleteProduct = async (req, res) => {
 
 export const deleteOrder = async (req, res) =>{
 
-  //---------------------------deleting a product--------------------------
+  //---------------------------deleting an order--------------------------
 
           try {
               const deleted = await Order.findOneAndDelete({_id:req.query.orderid});

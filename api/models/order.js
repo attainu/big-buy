@@ -1,6 +1,6 @@
 var mongoose=require("mongoose")
 var Schema=mongoose.Schema
-orderSchema=new Schema(
+ const orderSchema=new Schema(
     {
         userId:{
             type:Schema.Types.ObjectId,

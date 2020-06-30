@@ -5,7 +5,7 @@ import Joi from "@hapi/joi";
 import UserDetails from "../models/user";
 import AdminDetails from "../models/Admin";
 import Product from "../models/product";
-import Order from "../models/product";
+import Order from "../models/order";
 
 import { sendMailToUser, forgotPasswordMailing } from "../utils/nodeMailer";
 

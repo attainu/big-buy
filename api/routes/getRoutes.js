@@ -8,10 +8,12 @@ import {
   searchProductById,
   filterProducts,
   accountActivation,
-  cart
+  cart,
+  allOrders
 } from "../controllers/getControllers";
 
 import { authenticateAdminsToken, authenticateUsersToken } from "../middlewares/authenticate";
+import { get } from "http";
 
 //-------------------------------Admin-----------------------------------
 
@@ -25,6 +27,15 @@ getRouter.get(
   authenticateAdminsToken,
   allUsers
 );
+getRouter.get(
+  `/api/admin/orders/:pagenumber`,
+  authenticateAdminsToken,
+  allOrders
+);
+
+//-------------------------------landing page---------------------
+
+getRouter.get(`/`, (req, res) => res.send("Welcome to Big-Buy...Have a Happy Shopping"))
 
 //------------------------------user account activation-------------------
 
