@@ -1,20 +1,18 @@
 import nodemailer from "nodemailer";
 
-import { config } from "dotenv";
-
-config({ path: "../../.env" });
 
 const transport = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: 'smtp.gmail.com',
   port: 465,
   secure: true,
   auth: {
-    user: process.env.GMAIL,
-    pass: process.env.PASSWORD,
+    type: "login",
+    user: "bigbuyau7@gmail.com",
+    pass: 'backend123',
   },
 });
 
-// transport.verify().then((res) => console.log(res));
+ transport.verify().then((res) => console.log(res));
 
 export function sendMailToUser(user, email, activationToken) {
   transport
@@ -23,7 +21,7 @@ export function sendMailToUser(user, email, activationToken) {
       to: email,
       subject:
         "Email verification required for authenticating your Registration on BigBuy.com",
-      html: `Click on this link to activate your account on <b>Big-Buy</b>  https://BigBuy.herokuapp.com/api/user/accountactivation/${activationToken}?user=${user}`,
+      html: `Click on this link to activate your account on <b>Big-Buy</b>  https://big-buy.herokuapp.com/api/user/accountactivation/${activationToken}?user=${user}`,
     })
     .then((response) => {
       console.log(response);

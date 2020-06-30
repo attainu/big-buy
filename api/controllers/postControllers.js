@@ -152,7 +152,7 @@ export const addtocart= function (params) {
   var productId = req.params.productId
   Product.find({_id:productId}).then(function(product){
 
-  var cart = new order()
+  var cart = new Order()
       cart.userId=req.query.userId
       cart.product=product[0]._id
       cart.price=product[0].price
