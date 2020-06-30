@@ -82,7 +82,7 @@ export const userLogin = async (req, res) => {
     if (req.body.role == "Admin") var schema = AdminDetails;
     if (!req.body.role) var schema = UserDetails;
 
-    const user = await UserDetails.findOne({ email });
+    const user = await schema.findOne({ email });
     if (!user)
       return res
         .status(400)
