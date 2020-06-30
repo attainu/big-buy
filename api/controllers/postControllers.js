@@ -5,6 +5,7 @@ import Joi from "@hapi/joi";
 import UserDetails from "../models/user";
 import AdminDetails from "../models/Admin";
 import Product from "../models/product";
+import Order from "../models/product";
 
 import { sendMailToUser, forgotPasswordMailing } from "../utils/nodeMailer";
 
@@ -109,6 +110,8 @@ export const userLogin = async (req, res) => {
     return res.status(500).send({ error: error.message });
   }
 };
+//---------------------------forgot password----------------------------
+
 
 export const forgotPassword = async (req, res) => {
   try {
@@ -138,3 +141,34 @@ export const forgotPassword = async (req, res) => {
     return res.status(500).send({ error: err.message });
   }
 };
+
+
+//--------------------------------------addtocart----------------------------
+
+
+export const addtocart= function (params) {
+(req, res) =>{
+  var user = req.user
+  var productId = req.params.productId
+  Product.find({_id:productId}).then(function(product){
+
+  var cart = new order()
+      cart.userId=req.query.userId
+      cart.product=product[0]._id
+      cart.price=product[0].price
+      cart.name=product[0].name
+      cart.image=product[0].image
+      cart.save().then(function () {
+      })
+  user.save().then(function () {
+      res.send("Product successfully added to cart")
+  }).catch(function (err) {
+      console.log(err)
+      if (err.name === "ValidationError")
+          return res.status(400).send(`Validation Error: ${err.message}`);
+      return res.status(500).send("Server Error");
+  })
+      
+  })}
+
+}

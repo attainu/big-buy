@@ -6,25 +6,29 @@ import {
   adminLogout,
 } from "../controllers/deleteControllers";
 
-import auth from "../middlewares/authenticate";
+
+import { authenticateAdminsToken, authenticateUsersToken } from "../middlewares/authenticate";
 
 export const deleteRouter = Router();
 
 // -------------------------user Route-----------------------
 deleteRouter.delete(
   `/api/user/logout/`,
-  auth.authenticateUsersToken,
+  authenticateUsersToken,
   userLogout
 );
 
 // -------------------------admin Route-----------------------
 deleteRouter.delete(
   `/api/admin/logout/`,
-  auth.authenticateAdminsToken,
+  authenticateAdminsToken,
   adminLogout
 );
 deleteRouter.delete(
   `/api/admin/deleteproduct`,
-  auth.authenticateAdminsToken,
+  authenticateAdminsToken,
   deleteProduct
 );
+
+
+deleteRouter.delete(`/api/admin/deleteproduct`, authenticateAdminsToken, deleteProduct);

@@ -8,9 +8,10 @@ import {
   searchProductById,
   filterProducts,
   accountActivation,
+  cart
 } from "../controllers/getControllers";
 
-import { authenticateAdminsToken } from "../middlewares/authenticate";
+import { authenticateAdminsToken, authenticateUsersToken } from "../middlewares/authenticate";
 
 //-------------------------------Admin-----------------------------------
 
@@ -36,3 +37,4 @@ getRouter.get(
 getRouter.get(`/api/user/products/:pagenumber`, allAvailableProducts);
 getRouter.get(`/api/user/product/:productid`, searchProductById);
 getRouter.get(`/api/user/product/filterproducts/:pagenumber`, filterProducts); //-- search by query=name,seller,freeDelivery
+getRouter.get(`/api/user/cart/`, authenticateUsersToken,cart)

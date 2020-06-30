@@ -1,30 +1,33 @@
-import { model, Schema } from "mongoose";
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const AdminSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
-  jwt: {
+  jwt:{
     type: String,
-    required: false,
+    required: false
   },
-  isVerified: {
-    type: Boolean,
-    default: false,
+  isVerified:{
+    type:Boolean,
+    default:false
   },
-  isBlocked: {
-    type: Boolean,
-    default: false,
-  },
+  isBlocked:{
+    type:Boolean,
+    default:false
+  }
 });
 
-export const AdminDetails = model("adminDetail", AdminSchema);
+const AdminDetails = mongoose.model("adminDetail", AdminSchema);
+
+module.exports = AdminDetails;

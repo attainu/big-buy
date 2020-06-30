@@ -1,6 +1,8 @@
-import { UserDetails } from "../models/user";
-import { AdminDetails } from "../models/Admin";
-import { Product } from "../models/product";
+import UserDetails from "../models/user";
+import AdminDetails from "../models/Admin";
+import Product from "../models/product";
+import Order from "../models/product";
+
 
 // ----------------------Logout from Account (user)------------------------
 export const userLogout = async (req, res) => {
@@ -42,3 +44,18 @@ export const deleteProduct = async (req, res) => {
     res.status(404).send({ error: error.message });
   }
 };
+
+export const deleteOrder = async (req, res) =>{
+
+  //---------------------------deleting a product--------------------------
+
+          try {
+              const deleted = await Order.findOneAndDelete({_id:req.query.orderid});
+              if(!deleted) return res.send({error:'product doesnt exist'})
+              return res.status(202).send({message:"product deleted succesfully"});
+          }catch(error){
+              res.status(404).send({error:error.message});
+          }
+
+
+      }

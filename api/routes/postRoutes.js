@@ -7,9 +7,10 @@ import {
   userLogin,
   forgotPassword,
   postProduct,
+  addtocart
 } from "../controllers/postControllers";
 
-import { authenticateAdminsToken } from "../middlewares/authenticate";
+import { authenticateAdminsToken, authenticateUsersToken } from "../middlewares/authenticate";
 
 //--------------------Account Register Route (user and Admin)------------------
 postRouter.post(`/api/user/register`, userRegister);
@@ -23,3 +24,9 @@ postRouter.post(`/api/user/forgotpassword`, forgotPassword);
 //-----------------------Admin product post-----------------------
 
 postRouter.post(`/api/admin/postproduct`, authenticateAdminsToken, postProduct);
+
+
+
+//------------------------user add product to cart-----------------
+
+postRouter.post(`/api/user/addtocart/:productId`, authenticateUsersToken,addtocart)

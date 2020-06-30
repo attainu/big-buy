@@ -1,6 +1,7 @@
-import { UserDetails } from "../models/user";
-
-import { Product } from "../models/product";
+import UserDetails from "../models/user";
+import AdminDetails from "../models/Admin";
+import Product from "../models/product";
+import Order from "../models/product";
 
 import jwt from "jsonwebtoken";
 
@@ -121,3 +122,13 @@ export const accountActivation = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 };
+
+export const cart=   function (req, res) {
+  var user = req.user._id;
+  UserDetails.findOne({_id:user}).then(function(user){
+      id=user._id;
+  orders.find({ userId: id}).then(function(prod){
+      console.log(prod);
+      res.send({order:prod}) ;
+      });
+  })};
