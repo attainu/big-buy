@@ -126,8 +126,8 @@ export const accountActivation = async (req, res) => {
 export const cart=   function (req, res) {
   var user = req.user._id;
   UserDetails.findOne({_id:user}).then(function(user){
-      id=user._id;
-  orders.find({ userId: id}).then(function(prod){
+  var   id=user._id;
+  Order.find({ userId: id}).then(function(prod){
       console.log(prod);
       res.send({order:prod}) ;
       });

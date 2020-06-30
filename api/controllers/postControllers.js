@@ -146,8 +146,7 @@ export const forgotPassword = async (req, res) => {
 //--------------------------------------addtocart----------------------------
 
 
-export const addtocart= function (params) {
-(req, res) =>{
+export function addtocart(req, res){
   var user = req.user
   var productId = req.params.productId
   Product.find({_id:productId}).then(function(product){
@@ -171,4 +170,3 @@ export const addtocart= function (params) {
       
   })}
 
-}
